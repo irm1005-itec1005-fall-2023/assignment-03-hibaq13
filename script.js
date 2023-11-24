@@ -109,3 +109,61 @@ function clearCompletedTasks() {
 //  console.log(todoItems); // This should show the todo item you added
 //  removeToDoItem(0); // This should remove the todo item with ID 0 from the array
 //  markToDoItemAsCompleted(0); // This should mark the todo item with ID 0 as completed
+
+let todoItems = [];
+
+
+function addToDoItem(text) {
+  const newTodoId = todoItems.reduce((maxId, todo) => Math.max(maxId, todo.id), -1) + 1;
+  const newTodoItem = {
+    id: newTodoId,
+    text: text,
+    completed: false,
+  };
+  todoItems.push(newTodoItem);
+}
+
+
+function removeToDoItem(todoId) {
+  todoItems = todoItems.filter(item => item.id !== todoId);
+}
+
+
+function markToDoItemAsCompleted(todoId) {
+  const todoItem = todoItems.find(item => item.id === todoId);
+  if (todoItem) {
+    todoItem.completed = true;
+  }
+}
+
+
+function deleteToDoItem(todoId) {
+  todoItems = todoItems.filter(item => item.id !== todoId);
+  return todoItems.length < todoItems.reduce((count) => count + 1, 0);
+}
+
+function clearCompletedTasks() {
+  todoItems = todoItems.filter(item => !item.completed);
+}
+
+
+addToDoItem("Task 1");
+addToDoItem("Task 2");
+addToDoItem("Task 3");
+ 
+console.log(todoItems);
+ 
+markToDoItemAsCompleted(1);
+ 
+
+console.log(todoItems);
+ 
+deleteToDoItem(0);
+ 
+console.log(todoItems);
+ 
+clearCompletedTasks();
+ 
+console.log(todoItems);
+ 
+ 
